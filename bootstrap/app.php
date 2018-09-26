@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -78,9 +78,22 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+
+$classes = [
+    'App' => Illuminate\Support\Facades\App::class,
+    'Bus' => Illuminate\Support\Facades\Bus::class,
+    'Hash' => Illuminate\Support\Facades\Hash::class,
+    'Request' => Illuminate\Support\Facades\Request::class,
+];
+
+foreach ($classes as $alias => $class) {
+    if (! class_exists($alias)) {
+        class_alias($class, $alias);
+    }
+}
 
 /*
 |--------------------------------------------------------------------------
