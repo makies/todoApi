@@ -1,0 +1,5 @@
+linter:
+  code_sniffer:
+    dir: app/
+    options:
+      standard: PSR2
