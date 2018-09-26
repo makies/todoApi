@@ -1,8 +1,5 @@
 linter:
-  rubocop:
-    root_dir: 'sideci_demo'
-
-  phpmd:
-    root_dir: 'sideci_demo'
+  code_sniffer:
+    dir: app/
     options:
-      rule: 'phpmd.xml'
+      standard: PSR2
