@@ -23,6 +23,7 @@ class CreateTasks extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('body');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
