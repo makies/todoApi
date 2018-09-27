@@ -14,3 +14,12 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+// 検索
+$router->get('/task', 'TaskController@index');
+// 作成
+$router->post('/task', 'TaskController@create');
+// 更新
+$router->put('/task/{id}', 'TaskController@update');
+// 削除
+$router->delete('/task/{id}', 'TaskController@delete');
