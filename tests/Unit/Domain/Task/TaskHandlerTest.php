@@ -33,7 +33,7 @@ class TaskHandlerTest extends TestCase
     }
 
     /**
-     * コンストラクトのテスト
+     * コンストラクト
      */
     public function test__construct(): void
     {

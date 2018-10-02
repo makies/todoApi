@@ -33,7 +33,7 @@ class UpdateTaskOperationTest extends TestCase
     }
 
     /**
-     * コンストラクトのテスト
+     * コンストラクト
      */
     public function test__construct(): void
     {
@@ -44,7 +44,7 @@ class UpdateTaskOperationTest extends TestCase
     }
 
     /**
-     * __invokeのテスト
+     * __invoke
      */
     public function test__invoke(): void
     {
@@ -83,7 +83,7 @@ class UpdateTaskOperationTest extends TestCase
 
 
     /**
-     * __invokeのテスト
+     * __invoke
      *
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage Task not found.

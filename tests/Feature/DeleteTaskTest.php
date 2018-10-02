@@ -15,7 +15,7 @@ class DeleteTaskTest extends TestCase
     use DatabaseMigrations;
 
     /**
-     * タスクを削除するテスト
+     * タスクを削除する
      */
     public function testDeleteComplete(): void
     {

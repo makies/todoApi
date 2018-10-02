@@ -16,7 +16,7 @@ class CreateTaskTest extends TestCase
     use DatabaseMigrations;
 
     /**
-     * タスクを作成するテスト
+     * タスクを作成する
      */
     public function testCreateComplete(): void
     {
@@ -38,7 +38,7 @@ class CreateTaskTest extends TestCase
     }
 
     /**
-     * タイトルのみでタスクを作成するテスト
+     * タイトルのみでタスクを作成する
      */
     public function testCreateCompleteOnlyTitle(): void
     {
@@ -110,7 +110,7 @@ class CreateTaskTest extends TestCase
     }
 
     /**
-     * validationエラーとなるパターンのテスト
+     * validationエラーとなるパターン
      *
      * @dataProvider validateErrorDataProvider
      * @param array $params

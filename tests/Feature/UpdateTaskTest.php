@@ -113,7 +113,7 @@ class UpdateTaskTest extends TestCase
     }
 
     /**
-     * validationエラーとなるパターンのテスト
+     * validationエラーとなるパターン
      *
      * @dataProvider validateErrorDataProvider
      * @param array $params

@@ -33,7 +33,7 @@ class DeleteTaskOperationTest extends TestCase
     }
 
     /**
-     * コンストラクトのテスト
+     * コンストラクト
      */
     public function test__construct(): void
     {
@@ -44,7 +44,7 @@ class DeleteTaskOperationTest extends TestCase
     }
 
     /**
-     * __invokeのテスト
+     * __invoke
      */
     public function test__invoke(): void
     {
@@ -72,7 +72,7 @@ class DeleteTaskOperationTest extends TestCase
     }
 
     /**
-     * 削除対象がない__invokeのテスト
+     * 削除対象がない__invoke
      */
     public function test__invokeTaskNotFound(): void
     {

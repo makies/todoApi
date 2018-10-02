@@ -33,7 +33,7 @@ class CreateTaskOperationTest extends TestCase
     }
 
     /**
-     * コンストラクトのテスト
+     * コンストラクト
      */
     public function test__construct(): void
     {
@@ -44,7 +44,7 @@ class CreateTaskOperationTest extends TestCase
     }
 
     /**
-     * __invokeのテスト
+     * __invoke
      */
     public function test__invoke(): void
     {
