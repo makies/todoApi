@@ -15,4 +15,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
     }
+
+    public function boot()
+    {
+        \DB::listen(function ($query) {
+            $sql = $query->sql;
+            \Log::info($sql, $query->bindings);
+        });
+    }
 }
