@@ -9,6 +9,8 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 
 /**
  * Class UpdateTaskTest
+ *
+ * @covers \App\Http\Controllers\TaskController
  */
 class UpdateTaskTest extends TestCase
 {

@@ -9,6 +9,8 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 
 /**
  * Class DeleteTaskTest
+ *
+ * @covers \App\Http\Controllers\TaskController
  */
 class DeleteTaskTest extends TestCase
 {

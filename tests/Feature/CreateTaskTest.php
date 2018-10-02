@@ -10,6 +10,8 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 
 /**
  * タスク作成のAPIテスト
+ *
+ * @covers \App\Http\Controllers\TaskController
  */
 class CreateTaskTest extends TestCase
 {

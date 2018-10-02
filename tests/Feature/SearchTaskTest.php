@@ -9,6 +9,8 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 
 /**
  * タスク検索APIのテスト
+ *
+ * @covers \App\Http\Controllers\TaskController
  */
 class SearchTaskTest extends TestCase
 {
