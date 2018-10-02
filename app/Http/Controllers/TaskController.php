@@ -54,7 +54,7 @@ class TaskController extends Controller
      */
     public function index(Request $request, SearchTaskOperation $operation): Response
     {
-        return response($operation->__invoke($request->all()));
+        return response($operation->__invoke($request->only(['title', 'body'])));
     }
 
     /**

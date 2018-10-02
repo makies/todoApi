@@ -26,11 +26,10 @@ class SearchTaskOperation
 
 	/**
 	 * @param array $request
-	 * @return \App\Models\Task[]|\Illuminate\Database\Eloquent\Collection
+	 * @return \Illuminate\Database\Eloquent\Collection
 	 */
 	public function __invoke(array $request)
 	{
-		$params = array_only($request, ['params']);
-		return $this->taskHandler->searchTask($params);
+		return $this->taskHandler->searchTask($request);
 	}
 }
