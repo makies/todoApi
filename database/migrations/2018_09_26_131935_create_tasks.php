@@ -20,7 +20,7 @@ class CreateTasks extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('task_id');
             $table->string('title');
             $table->string('body');
             $table->softDeletes();

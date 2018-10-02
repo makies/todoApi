@@ -20,6 +20,6 @@ $router->get('/task', 'TaskController@index');
 // 作成
 $router->post('/task', 'TaskController@create');
 // 更新
-$router->put('/task/{id}', 'TaskController@update');
+$router->put('/task/{taskId}', 'TaskController@update');
 // 削除
-$router->delete('/task/{id}', 'TaskController@delete');
+$router->delete('/task/{taskId}', 'TaskController@delete');

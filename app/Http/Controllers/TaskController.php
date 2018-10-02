@@ -1,10 +1,16 @@
 <?php
 /**
- * @copyright makies <makies@gmail.com>
+ * @copyright maki fujiwara <makies@gmail.com>
  */
 
 namespace App\Http\Controllers;
 
+use App\Operation\Task\CreateTaskOperation;
+use App\Operation\Task\DeleteTaskOperation;
+use App\Models\Task;
+use App\Operation\Task\SearchTaskOperation;
+use App\Operation\Task\UpdateTaskOperation;
+use App\Services\TransactionService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -16,46 +22,96 @@ use Illuminate\Http\Response;
 class TaskController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * @var Task|null
      */
-    public function __construct()
+    protected $task;
+
+    /**
+     * 検証ルール
+     *
+     * @var array
+     */
+    private $validateRule = [
+        'title' => [
+            'required',
+            'string',
+            'max:255',
+        ],
+        'body' => [
+            'required',
+            'string',
+            'max:255',
+        ],
+    ];
+
+    private $validateMessages = [
+
+    ];
+
+    /**
+     * @param Request                                 $request
+     * @param \App\Operation\Task\SearchTaskOperation $operation
+     * @return Response
+     */
+    public function index(Request $request, SearchTaskOperation $operation): Response
     {
-        //
+        return response($operation->__invoke($request->all()));
     }
 
     /**
-     * @param Request $request
+     * @param \Illuminate\Http\Request                $request
+     * @param \App\Services\TransactionService        $service
+     * @param \App\Operation\Task\CreateTaskOperation $operation
      * @return Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function index(Request $request): Response
+    public function create(Request $request, TransactionService $service, CreateTaskOperation $operation): Response
     {
-        return response(collect());
+        $this->validate($request, $this->validateRule, $this->validateMessages);
+
+        // 保存
+        $service->transaction(function () use ($request, $operation) {
+            $this->task = $operation->__invoke($request->only(['title', 'body']));
+        });
+
+        return response($this->task->toArray(), 201);
     }
 
     /**
-     * @param Request $request
-     * @return Response
+     * @param \Illuminate\Http\Request                $request
+     * @param \App\Services\TransactionService        $service
+     * @param \App\Operation\Task\UpdateTaskOperation $operation
+     * @param int                                     $taskId
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function create(Request $request): Response
-    {
-        return response([], 201);
+    public function update(
+        Request $request,
+        TransactionService $service,
+        UpdateTaskOperation $operation,
+        int $taskId
+    ): Response {
+        $this->validate($request, $this->validateRule, $this->validateMessages);
+        $service->transaction(function () use ($request, $operation, $taskId) {
+            $this->task = $operation->__invoke($taskId, $request->only(['title', 'body']));
+        });
+
+        return response($this->task->toArray(), 204);
     }
 
     /**
-     * @param Request $request
+     * @param \App\Services\TransactionService        $service
+     * @param \App\Operation\Task\DeleteTaskOperation $operation
+     * @param int                                     $taskId
      * @return Response
+     * @throws \Exception
      */
-    public function update(Request $request): Response
+    public function delete(TransactionService $service, DeleteTaskOperation $operation, int $taskId): Response
     {
-        return response([], 204);
-    }
+        $service->transaction(function () use ($operation, $taskId) {
+            $operation->__invoke($taskId);
+        });
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function delete(Request $request): Response
-    {
         return response([], 204);
     }
 }
