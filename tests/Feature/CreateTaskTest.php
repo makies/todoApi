@@ -85,12 +85,27 @@ class CreateTaskTest extends TestCase
     public function validateErrorDataProvider(): array
     {
         return [
-            [['body' => 'ないよう' . microtime()], [
-                'title' => ['Title is required.'],
-            ]],
-            [['title' => [], 'body' => []], [
-                'title' => ['Title is required.'],
-            ]],
+            // 本文がない
+            [
+                ['body' => 'ないよう' . microtime()],
+                ['title' => ['The title field is required.']]
+            ],
+            // タイトル・本文がarray
+            [
+                ['title' => [1], 'body' => [2]],
+                [
+                    'title' => ['The title must be a string.'],
+                    'body' => ['The body must be a string.'],
+                ]
+            ],
+            // タイトル・本文が255バイト以上ある
+            [
+                ['title' => str_random(256), 'body' => str_random(256)],
+                [
+                    'title' => ['The title may not be greater than 255 characters.'],
+                    'body' => ['The body may not be greater than 255 characters.'],
+                ],
+            ],
         ];
     }
 
@@ -99,13 +114,15 @@ class CreateTaskTest extends TestCase
      *
      * @dataProvider validateErrorDataProvider
      * @param array $params
+     * @param array $messages
      */
-    public function testValidateError(array $params): void
+    public function testValidateError(array $params, array $messages): void
     {
         $this->post('/task/', $params);
 
         $this->assertResponseStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-        // TODO エラーメッセージもテストしたい
+        $content = json_decode($this->response->content(), true);
+        $this->assertEquals($messages, $content);
     }
 
     /**

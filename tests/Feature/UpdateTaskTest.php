@@ -89,6 +89,11 @@ class UpdateTaskTest extends TestCase
                 ['body' => 'ないよう' . microtime()],
                 ['title' => ['The title field is required.']],
             ],
+            // タイトルがarray
+            [
+                ['title' => [1]],
+                ['title' => ['The title must be a string.']],
+            ],
             // タイトルも本文もない
             [
                 [],
