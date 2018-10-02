@@ -16,6 +16,7 @@ use TestCase;
  * Class CreateTaskOperationTest
  *
  * @package Unit\Operation\Task
+ * @covers \App\Operation\Task\CreateTaskOperation
  */
 class CreateTaskOperationTest extends TestCase
 {
@@ -35,7 +36,7 @@ class CreateTaskOperationTest extends TestCase
     /**
      * コンストラクト
      */
-    public function test__construct(): void
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(
             CreateTaskOperation::class,
@@ -46,7 +47,7 @@ class CreateTaskOperationTest extends TestCase
     /**
      * __invoke
      */
-    public function test__invoke(): void
+    public function testInvoke(): void
     {
         $request = [
             'title' => 'たいとる',

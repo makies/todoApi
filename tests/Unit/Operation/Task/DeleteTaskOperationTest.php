@@ -16,6 +16,7 @@ use TestCase;
  * Class DeleteTaskOperationTest
  *
  * @package Unit\Operation\Task
+ * @covers \App\Operation\Task\DeleteTaskOperation
  */
 class DeleteTaskOperationTest extends TestCase
 {
@@ -35,7 +36,7 @@ class DeleteTaskOperationTest extends TestCase
     /**
      * コンストラクト
      */
-    public function test__construct(): void
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(
             DeleteTaskOperation::class,
@@ -46,7 +47,7 @@ class DeleteTaskOperationTest extends TestCase
     /**
      * __invoke
      */
-    public function test__invoke(): void
+    public function testInvoke(): void
     {
         $request = [
             'title' => 'たいとる',
@@ -74,7 +75,7 @@ class DeleteTaskOperationTest extends TestCase
     /**
      * 削除対象がない__invoke
      */
-    public function test__invokeTaskNotFound(): void
+    public function testInvokeTaskNotFound(): void
     {
         $this->taskHandler->shouldReceive('findTask')
             ->once()

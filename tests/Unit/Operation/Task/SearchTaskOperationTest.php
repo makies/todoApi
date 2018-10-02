@@ -18,6 +18,7 @@ use TestCase;
  * Class SearchTaskOperationTest
  *
  * @package Unit\Operation\Task
+ * @covers \App\Operation\Task\SearchTaskOperation
  */
 class SearchTaskOperationTest extends TestCase
 {
@@ -37,7 +38,7 @@ class SearchTaskOperationTest extends TestCase
     /**
      * コンストラクト
      */
-    public function test__construct(): void
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(
             SearchTaskOperation::class,
@@ -48,7 +49,7 @@ class SearchTaskOperationTest extends TestCase
     /**
      * __invoke
      */
-    public function test__invoke(): void
+    public function testInvoke(): void
     {
         $task1 = factory(Task::class)->create(['title' => 'たいとる1', 'body' => 'ほんぶん']);
         $task2 = factory(Task::class)->create(['title' => 'たいとる2', 'body' => '']);

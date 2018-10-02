@@ -16,6 +16,7 @@ use TestCase;
  * Class UpdateTaskOperationTest
  *
  * @package Unit\Operation\Task
+ * @covers \App\Operation\Task\UpdateTaskOperation
  */
 class UpdateTaskOperationTest extends TestCase
 {
@@ -35,7 +36,7 @@ class UpdateTaskOperationTest extends TestCase
     /**
      * コンストラクト
      */
-    public function test__construct(): void
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(
             UpdateTaskOperation::class,
@@ -46,7 +47,7 @@ class UpdateTaskOperationTest extends TestCase
     /**
      * __invoke
      */
-    public function test__invoke(): void
+    public function testInvoke(): void
     {
         $before = [
             'title' => 'たいとる',
@@ -88,7 +89,7 @@ class UpdateTaskOperationTest extends TestCase
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage Task not found.
      */
-    public function test__invokeTaskNotFound(): void
+    public function testInvokeTaskNotFound(): void
     {
         $request = [
             'title' => 'たいとる',

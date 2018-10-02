@@ -3,7 +3,7 @@
  * @copyright maki fujiwara <makies@gmail.com>
  */
 
-namespace Unit\Operation\Task;
+namespace Unit\Domain\Task;
 
 use App\Domain\Task\TaskHandler;
 use App\Domain\Task\TaskRepository;
@@ -16,6 +16,7 @@ use TestCase;
  * Class TaskHandlerTest
  *
  * @package Unit\Operation\Task
+ * @covers \App\Domain\Task\TaskHandler
  */
 class TaskHandlerTest extends TestCase
 {
@@ -35,7 +36,7 @@ class TaskHandlerTest extends TestCase
     /**
      * コンストラクト
      */
-    public function test__construct(): void
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(
             TaskHandler::class,
@@ -43,7 +44,7 @@ class TaskHandlerTest extends TestCase
         );
     }
 
-    public function test__searchTask(): void
+    public function testSearchTask(): void
     {
         $params = [];
 
@@ -55,7 +56,7 @@ class TaskHandlerTest extends TestCase
         $this->assertEquals(collect(), $handler->searchTask($params));
     }
 
-    public function test__delete(): void
+    public function testDelete(): void
     {
         $task = M::mock(Task::class);
         $task->shouldReceive('delete')
