@@ -124,20 +124,4 @@ class CreateTaskTest extends TestCase
         $content = json_decode($this->response->content(), true);
         $this->assertEquals($messages, $content);
     }
-
-    /**
-     * 存在しないタスクを更新しようとする
-     */
-    public function testTaskNotFound(): void
-    {
-        $params = [
-            'title' => 'たいとる' . microtime(),
-            'body' => 'ないよう' . microtime(),
-        ];
-        $this->put('/task' . 1234, $params);
-
-        $this->assertResponseStatus(404);
-
-        $this->markTestIncomplete('エラーメッセージのテストができていない');
-    }
 }
