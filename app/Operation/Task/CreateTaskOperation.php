@@ -7,6 +7,7 @@ namespace App\Operation\Task;
 
 use App\Domain\Task\TaskHandler;
 use App\Models\Task;
+use Illuminate\Support\Arr;
 
 /**
  * タスクを作成するオペレーション
@@ -38,8 +39,8 @@ class CreateTaskOperation
 	public function __invoke(array $request): Task
 	{
 		$task = new Task([
-			'title' => $request['title'],
-			'body' => $request['body'],
+			'title' => Arr::get($request, 'title'),
+			'body' => Arr::get($request, 'body', null),
 		]);
 
 		$this->taskHandler->persist($task);

@@ -38,7 +38,6 @@ class TaskController extends Controller
             'max:255',
         ],
         'body' => [
-            'required',
             'string',
             'max:255',
         ],

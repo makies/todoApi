@@ -22,7 +22,7 @@ class CreateTasks extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('task_id');
             $table->string('title');
-            $table->string('body');
+            $table->string('body')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

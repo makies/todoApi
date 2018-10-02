@@ -7,6 +7,7 @@ namespace App\Operation\Task;
 
 use App\Domain\Task\TaskHandler;
 use App\Models\Task;
+use Illuminate\Support\Arr;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -44,8 +45,8 @@ class UpdateTaskOperation
 			throw new NotFoundHttpException('Task not found.');
 		}
 
-		$task->title = $request['title'];
-		$task->body = $request['body'];
+		$task->title = Arr::get($request, 'title');
+		$task->body = Arr::get($request, 'body', null);
 
 		$this->taskHandler->persist($task);
 

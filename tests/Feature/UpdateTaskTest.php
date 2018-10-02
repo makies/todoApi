@@ -37,12 +37,32 @@ class UpdateTaskTest extends TestCase
     }
 
     /**
+     * タイトルだけでタスクを更新する
+     */
+    public function testUpdateCompleteOnlyTitle(): void
+    {
+        $task = factory(Task::class)->create();
+
+        $params = [
+            'title' => 'たいとる' . microtime(),
+        ];
+
+        $this->put('/task/' . $task->task_id, $params);
+
+        $this->assertResponseStatus(Response::HTTP_NO_CONTENT);
+
+        $response = json_decode($this->response->getContent(), true);
+        $this->assertSame($params['title'], $response['title']);
+        $this->assertEmpty($response['body']);
+    }
+
+    /**
      * 同名のタスクが存在しても登録できる
      */
     public function testDuplicateTask(): void
     {
-        $task1 = factory(Task::class)->create(['title' => 'タイトル', 'body' => 'ないよう', 'deleted_at' => null]);
-        $task2 = factory(Task::class)->create(['title' => 'タイトル2', 'body' => 'ないよう2', 'deleted_at' => null]);
+        $task1 = factory(Task::class)->create(['title' => 'タイトル', 'body' => 'ないよう']);
+        $task2 = factory(Task::class)->create(['title' => 'タイトル2', 'body' => 'ないよう2']);
 
         $params = [
             'title' => $task2->title,
@@ -69,17 +89,11 @@ class UpdateTaskTest extends TestCase
                 ['body' => 'ないよう' . microtime()],
                 ['title' => ['The title field is required.']],
             ],
-            // 本文がない
-            [
-                ['title' => 'タイトル' . microtime()],
-                ['body' => ['The body field is required.']],
-            ],
             // タイトルも本文もない
             [
                 [],
                 [
                     'title' => ['The title field is required.'],
-                    'body' => ['The body field is required.'],
                 ],
             ],
             // タイトル・本文が255バイト以上ある

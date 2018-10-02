@@ -38,6 +38,27 @@ class CreateTaskTest extends TestCase
     }
 
     /**
+     * タイトルのみでタスクを作成するテスト
+     */
+    public function testCreateCompleteOnlyTitle(): void
+    {
+        Carbon::setTestNow(Carbon::now());
+        $now = Carbon::now()->toDateTimeString();
+        $this->post('/task', [
+            'title' => 'たいとる',
+        ]);
+
+        $this->assertResponseStatus(Response::HTTP_CREATED);
+        $response = json_decode($this->response->content(), true);
+        $this->assertNotEmpty($response['task_id']);
+        $this->assertInternalType('numeric', $response['task_id']);
+        $this->assertEquals('たいとる', $response['title']);
+        $this->assertEmpty($response['body']);
+        $this->assertEquals($now, $response['created_at']);
+        $this->assertEquals($now, $response['updated_at']);
+    }
+
+    /**
      * 同名のタスクが存在しても登録できる
      */
     public function testDuplicateTask(): void
@@ -64,9 +85,12 @@ class CreateTaskTest extends TestCase
     public function validateErrorDataProvider(): array
     {
         return [
-            [['body' => 'ないよう' . microtime()]],
-            [['title' => 'タイトル' . microtime()]],
-            [['title' => [], 'body' => []]],
+            [['body' => 'ないよう' . microtime()], [
+                'title' => ['Title is required.'],
+            ]],
+            [['title' => [], 'body' => []], [
+                'title' => ['Title is required.'],
+            ]],
         ];
     }
 
