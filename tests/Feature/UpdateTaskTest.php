@@ -145,8 +145,8 @@ class UpdateTaskTest extends TestCase
         $this->put('/task' . 1234, $params);
 
         $this->assertResponseStatus(404);
-
-        $this->markAsRisky('エラーメッセージのテストができていない');
+        $response = json_decode($this->response->getContent(), true);
+        $this->assertEquals('Task not found.', $response['message']);
     }
 
     /**
@@ -162,6 +162,5 @@ class UpdateTaskTest extends TestCase
         $this->put('/task', $params);
 
         $this->assertResponseStatus(405);
-        $this->markAsRisky('エラーメッセージのテストができていない');
     }
 }
