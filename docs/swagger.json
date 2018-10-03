@@ -1,0 +1,172 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Todo REST API",
+    "version": "1.0.0",
+    "title": "Todo REST API"
+  },
+  "host": "todoapi.homestead8.test",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "task",
+      "description": "タスク"
+    }
+  ],
+  "paths": {
+    "/tasks": {
+      "get": {
+        "summary": "タスク一覧・検索",
+        "tags": [
+          "task"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "description": "タイトル"
+          },
+          {
+            "in": "query",
+            "name": "body",
+            "type": "string",
+            "description": "本文"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/TaskList"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new task",
+        "tags": [
+          "task"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "description": "タイトル"
+          },
+          {
+            "in": "formData",
+            "name": "body",
+            "type": "string",
+            "description": "本文"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "ok"
+          },
+          "442": {
+            "description": "Validation Error"
+          }
+        }
+      }
+    },
+    "/tasks/{task_id}": {
+      "put": {
+        "tags": [
+          "task"
+        ],
+        "summary": "タスクを更新する",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "task_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "in": "formData",
+            "name": "title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "body",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ok"
+          },
+          "404": {
+            "description": "タスクが存在しない"
+          },
+          "442": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "task"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "task_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "タスク削除完了（もしくは存在していなかった）"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Task": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1234
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      }
+    },
+    "TaskList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Task"
+      }
+    }
+  }
+}
