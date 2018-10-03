@@ -15,20 +15,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Task extends Model
 {
-	use SoftDeletes;
+    use SoftDeletes;
 
-	/**
-	 * @var string
-	 */
-	protected $primaryKey = 'task_id';
+    /**
+     * @var string
+     */
+    protected $primaryKey = 'task_id';
 
-	/**
-	 * 書き込み可能なカラム名
-	 *
-	 * @var array
-	 */
-	protected $fillable = [
-		'title',
-		'body',
-	];
+    /**
+     * 書き込み可能なカラム名
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'body',
+    ];
 }
