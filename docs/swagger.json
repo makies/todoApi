@@ -48,7 +48,7 @@
         }
       },
       "post": {
-        "summary": "Add a new task",
+        "summary": "タスク新規作成",
         "tags": [
           "task"
         ],
@@ -72,10 +72,13 @@
         ],
         "responses": {
           "201": {
-            "description": "ok"
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
           },
           "442": {
-            "description": "Validation Error"
+            "description": "バリデーションエラー"
           }
         }
       }
@@ -100,24 +103,29 @@
           {
             "in": "formData",
             "name": "title",
+            "description": "タイトル",
             "type": "string",
             "required": true
           },
           {
             "in": "formData",
             "name": "body",
+            "description": "本文",
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "ok"
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
           },
           "404": {
             "description": "タスクが存在しない"
           },
           "442": {
-            "description": "Validation exception"
+            "description": "バリデーションエラー"
           }
         }
       },
@@ -125,6 +133,7 @@
         "tags": [
           "task"
         ],
+        "summary": "タスクを削除する",
         "parameters": [
           {
             "in": "path",
@@ -151,14 +160,25 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64",
-          "example": 1234
+          "example": 1
         },
         "title": {
-          "type": "string"
+          "type": "string",
+          "example": "タイトル",
+          "maxLength": 255
         },
         "body": {
-          "type": "string"
+          "type": "string",
+          "example": "内容",
+          "maxLength": 255
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
