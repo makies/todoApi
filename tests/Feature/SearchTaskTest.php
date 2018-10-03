@@ -56,6 +56,9 @@ class SearchTaskTest extends TestCase
         $this->assertEquals($task2->toArray(), $response[1]);
     }
 
+    /**
+     * 本文部分一致
+     */
     public function testSearchTasksWithBody(): void
     {
         $task1 = factory(Task::class)->create(['title' => '牛乳を買う', 'body' => 'ほんぶん']);
@@ -69,5 +72,14 @@ class SearchTaskTest extends TestCase
         $this->assertCount(1, $response);
 
         $this->assertEquals($task2->toArray(), $response[0]);
+    }
+
+    /**
+     * 該当するものがない
+     */
+    public function testTaskNotFound()
+    {
+        $this->get('/task');
+        $this->assertEquals('[]', $this->response->getContent());
     }
 }

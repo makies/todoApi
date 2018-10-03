@@ -138,15 +138,11 @@ class UpdateTaskTest extends TestCase
     public function testTaskNotFound(): void
     {
         $params = [
-            'title' => 'たいとる' . microtime(),
-            'body' => 'ないよう' . microtime(),
-            'deleted_at' => null,
+            'title' => 'たいとる',
+            'body' => 'ほんぶん',
         ];
         $this->put('/task' . 1234, $params);
-
-        $this->assertResponseStatus(404);
-
-        $this->markAsRisky('エラーメッセージのテストができていない');
+        $this->assertResponseStatus(Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -161,7 +157,6 @@ class UpdateTaskTest extends TestCase
         ];
         $this->put('/task', $params);
 
-        $this->assertResponseStatus(405);
-        $this->markAsRisky('エラーメッセージのテストができていない');
+        $this->assertResponseStatus(Response::HTTP_METHOD_NOT_ALLOWED);
     }
 }
