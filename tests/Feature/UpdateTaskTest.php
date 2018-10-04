@@ -31,7 +31,7 @@ class UpdateTaskTest extends TestCase
 
         $this->put('/task/' . $task->task_id, $params);
 
-        $this->assertResponseStatus(Response::HTTP_NO_CONTENT);
+        $this->assertResponseStatus(Response::HTTP_OK);
 
         $response = json_decode($this->response->getContent(), true);
         $this->assertSame($params['title'], $response['title']);
@@ -51,7 +51,7 @@ class UpdateTaskTest extends TestCase
 
         $this->put('/task/' . $task->task_id, $params);
 
-        $this->assertResponseStatus(Response::HTTP_NO_CONTENT);
+        $this->assertResponseStatus(Response::HTTP_OK);
 
         $response = json_decode($this->response->getContent(), true);
         $this->assertSame($params['title'], $response['title']);
@@ -73,7 +73,7 @@ class UpdateTaskTest extends TestCase
 
         $this->put('/task/' . $task2->task_id, $params);
 
-        $this->assertResponseStatus(Response::HTTP_NO_CONTENT);
+        $this->assertResponseStatus(Response::HTTP_OK);
 
         $response = json_decode($this->response->getContent(), true);
         $this->assertSame($params['title'], $response['title']);

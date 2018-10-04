@@ -95,7 +95,7 @@ class TaskController extends Controller
             $this->task = $operation->__invoke($taskId, $request->only(['title', 'body']));
         });
 
-        return response($this->task->toArray(), 204);
+        return response($this->task->toArray(), Response::HTTP_OK);
     }
 
     /**
