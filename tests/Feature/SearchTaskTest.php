@@ -82,6 +82,6 @@ class SearchTaskTest extends TestCase
     public function testTaskNotFound()
     {
         $this->get('/task');
-        $this->assertEquals('[]', $this->response->getContent());
+        $this->assertSame('[]', $this->response->getContent());
     }
 }

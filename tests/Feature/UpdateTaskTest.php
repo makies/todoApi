@@ -131,7 +131,7 @@ class UpdateTaskTest extends TestCase
 
         $this->assertResponseStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $content = json_decode($this->response->content(), true);
-        $this->assertEquals($messages, $content);
+        $this->assertSame($messages, $content);
     }
 
     /**

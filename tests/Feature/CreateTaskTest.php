@@ -35,10 +35,10 @@ class CreateTaskTest extends TestCase
         $response = json_decode($this->response->content(), true);
         $this->assertNotEmpty($response['task_id']);
         $this->assertInternalType('numeric', $response['task_id']);
-        $this->assertEquals('たいとる', $response['title']);
-        $this->assertEquals('ないよう', $response['body']);
-        $this->assertEquals($now, $response['created_at']);
-        $this->assertEquals($now, $response['updated_at']);
+        $this->assertSame('たいとる', $response['title']);
+        $this->assertSame('ないよう', $response['body']);
+        $this->assertSame($now, $response['created_at']);
+        $this->assertSame($now, $response['updated_at']);
     }
 
     /**
@@ -58,8 +58,8 @@ class CreateTaskTest extends TestCase
         $this->assertInternalType('numeric', $response['task_id']);
         $this->assertEquals('たいとる', $response['title']);
         $this->assertEmpty($response['body']);
-        $this->assertEquals($now, $response['created_at']);
-        $this->assertEquals($now, $response['updated_at']);
+        $this->assertSame($now, $response['created_at']);
+        $this->assertSame($now, $response['updated_at']);
     }
 
     /**
@@ -126,6 +126,6 @@ class CreateTaskTest extends TestCase
 
         $this->assertResponseStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $content = json_decode($this->response->content(), true);
-        $this->assertEquals($messages, $content);
+        $this->assertSame($messages, $content);
     }
 }
