@@ -9,6 +9,7 @@ use App\Operation\Task\DeleteTaskOperation;
 use App\Domain\Task\TaskHandler;
 use App\Models\Task;
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 use Mockery as M;
 use TestCase;
 
@@ -21,6 +22,7 @@ use TestCase;
 class DeleteTaskOperationTest extends TestCase
 {
     use DatabaseMigrations;
+    use DatabaseTransactions;
 
     /**
      * @var TaskHandler

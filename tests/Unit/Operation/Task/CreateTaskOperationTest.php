@@ -9,6 +9,7 @@ use App\Operation\Task\CreateTaskOperation;
 use App\Domain\Task\TaskHandler;
 use App\Models\Task;
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 use Mockery as M;
 use TestCase;
 
@@ -21,6 +22,7 @@ use TestCase;
 class CreateTaskOperationTest extends TestCase
 {
     use DatabaseMigrations;
+    use DatabaseTransactions;
 
     /**
      * @var TaskHandler

@@ -6,6 +6,7 @@
 use App\Models\Task;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 
 /**
  * Class DeleteTaskTest
@@ -15,6 +16,7 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 class DeleteTaskTest extends TestCase
 {
     use DatabaseMigrations;
+    use DatabaseTransactions;
 
     /**
      * タスクを削除する

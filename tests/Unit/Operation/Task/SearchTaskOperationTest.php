@@ -11,6 +11,7 @@ use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 use Mockery as M;
 use TestCase;
 
@@ -23,6 +24,7 @@ use TestCase;
 class SearchTaskOperationTest extends TestCase
 {
     use DatabaseMigrations;
+    use DatabaseTransactions;
 
     /**
      * @var TaskHandler

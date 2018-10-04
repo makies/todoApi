@@ -6,6 +6,7 @@
 use App\Models\Task;
 use Carbon\Carbon;
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 
 /**
  * タスク検索APIのテスト
@@ -15,6 +16,7 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 class SearchTaskTest extends TestCase
 {
     use DatabaseMigrations;
+    use DatabaseTransactions;
 
     /**
      * パラメータなし

@@ -54,7 +54,7 @@ class TaskController extends Controller
      */
     public function index(Request $request, SearchTaskOperation $operation): Response
     {
-        return response($operation->__invoke($request->only(['title', 'body'])));
+        return response($operation->__invoke($request->only(['title', 'body'])), Response::HTTP_OK);
     }
 
     /**
@@ -73,7 +73,7 @@ class TaskController extends Controller
             $this->task = $operation->__invoke($request->only(['title', 'body']));
         });
 
-        return response($this->task->toArray(), 201);
+        return response($this->task->toArray(), Response::HTTP_CREATED);
     }
 
     /**
@@ -95,7 +95,7 @@ class TaskController extends Controller
             $this->task = $operation->__invoke($taskId, $request->only(['title', 'body']));
         });
 
-        return response($this->task->toArray(), 204);
+        return response($this->task->toArray(), Response::HTTP_OK);
     }
 
     /**
@@ -111,6 +111,6 @@ class TaskController extends Controller
             $operation->__invoke($taskId);
         });
 
-        return response([], 204);
+        return response([], Response::HTTP_NO_CONTENT);
     }
 }
