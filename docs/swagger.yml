@@ -77,7 +77,7 @@ paths:
         description: "本文"
         type: string
       responses:
-        204:
+        200:
           description: "ok"
           schema:
             $ref: '#/definitions/Task'
