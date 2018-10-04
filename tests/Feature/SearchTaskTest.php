@@ -79,7 +79,7 @@ class SearchTaskTest extends TestCase
     /**
      * 該当するものがない
      */
-    public function testTaskNotFound()
+    public function testTaskNotFound(): void
     {
         $this->get('/task');
         $this->assertSame('[]', $this->response->getContent());
