@@ -7,6 +7,7 @@ use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 
 /**
  * タスク作成のAPIテスト
@@ -16,6 +17,7 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 class CreateTaskTest extends TestCase
 {
     use DatabaseMigrations;
+    use DatabaseTransactions;
 
     /**
      * タスクを作成する

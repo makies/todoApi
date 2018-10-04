@@ -6,6 +6,7 @@
 use App\Models\Task;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 
 /**
  * Class UpdateTaskTest
@@ -15,6 +16,7 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 class UpdateTaskTest extends TestCase
 {
     use DatabaseMigrations;
+    use DatabaseTransactions;
 
     /**
      * タスクを更新する
