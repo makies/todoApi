@@ -79,9 +79,9 @@ class SearchTaskTest extends TestCase
     /**
      * 該当するものがない
      */
-    public function testTaskNotFound()
+    public function testTaskNotFound(): void
     {
         $this->get('/task');
-        $this->assertEquals('[]', $this->response->getContent());
+        $this->assertSame('[]', $this->response->getContent());
     }
 }
